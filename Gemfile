@@ -43,6 +43,11 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rspec-rails', '~> 6.0.0'
+  gem 'shoulda-matchers', '~> 5.0'
+  gem 'database_cleaner', '1.7.0'
+  gem 'simplecov', require: false
+  gem 'factory_bot_rails'
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
