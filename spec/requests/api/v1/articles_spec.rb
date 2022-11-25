@@ -19,4 +19,44 @@ RSpec.describe "Api::V1::Articles", type: :request do
       end
     end
   end
+
+  describe "#POST" do
+    describe "#create" do
+      context 'with valid parameters' do
+        before do
+          post "#{API_V1}/articles", params:
+                            { article: {
+                              title: 'Cat 1',
+                              url: 'test url',
+                              posted_by: 'someone'
+                            } }
+        end
+
+        it 'returns the article correctly' do
+          expect(json['article']['title']).to eq('Cat 1')
+          expect(json['article']['url']).to eq('test url')
+          expect(json['article']['posted_by']).to eq('someone')
+        end
+
+        it 'returns a created status' do
+          expect(response).to have_http_status(:created)
+        end
+      end
+
+      context 'with invalid parameters' do
+        before do
+          post "#{API_V1}/articles", params:
+                            { article: {
+                              title: '',
+                              url: 'test url',
+                              posted_by: 'someone'
+                            } }
+        end
+
+        it 'returns a bad request status' do
+          expect(response).to have_http_status(:bad_request)
+        end
+      end
+    end
+  end
 end
