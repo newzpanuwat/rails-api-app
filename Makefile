@@ -1,5 +1,5 @@
 build:
-	docker build -t rails-api-app .
+	docker compose -f docker-compose.yaml build
 
 tag:
 	docker tag rails-api-app 82xcherodinger/rails-api-app
